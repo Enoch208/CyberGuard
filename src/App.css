@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+footer div{
+    margin-top: .9em;
+}
+footer form input ,footer form  button{
+    display: block;
+    height: 2.5em;
+}
+
+footer form  input{
+    flex-basis: 100%;
+}
+.newsletter{
+    color: greenyellow;
+}

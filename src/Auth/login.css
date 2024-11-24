@@ -1,0 +1,125 @@
+/* login.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .bg-gradient-light {
+    background: linear-gradient(to bottom right, #e0f7ff, #cfdfff);
+    color: #1a202c;
+  }
+  
+  .bg-gradient-dark {
+    background: linear-gradient(to bottom right, #1e293b, #0f172a);
+    color: #f8fafc;
+  }
+  
+  /* Header */
+  .header-light {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+  }
+  
+  .header-dark {
+    background: linear-gradient(to right, #334155, #1e293b);
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Login Form */
+  .login-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-container-light {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .login-container-dark {
+    background: #1f2937;
+    border: 1px solid #374151;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #d1d5db;
+    transition: border-color 0.3s;
+  }
+  
+  .input-field:focus {
+    border-color: #10b981;
+    outline: none;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+  }
+  
+  .input-icon-dark {
+    color: #6b7280;
+  }
+  
+  .button-primary {
+    width: 100%;
+    padding: 12px;
+    background: #10b981;
+    color: #ffffff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .button-primary:hover {
+    background: #059669;
+    transform: translateY(-2px);
+  }
+  
+  .link {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .link:hover {
+    color: #1d4ed8;
+  }
+  
