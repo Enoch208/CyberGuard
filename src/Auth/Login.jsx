@@ -1,14 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Shield, Lock, Mail, ChevronRight, Sun, Moon, Info, Eye, EyeOff } from "lucide-react";
+import { 
+  Shield, Lock, Mail, ChevronRight, Sun, Moon, 
+  Eye, EyeOff, UserPlus, UserCheck, KeyRound, 
+  AtSign, ArrowLeft, User, Sparkles
+} from "lucide-react";
 
-const Login = ({ isDarkMode, toggleDarkMode }) => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
+  const [formData, setFormData] = useState({ 
+    email: "", 
+    password: "", 
+    username: "", 
+    confirmPassword: "" 
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [showSignup, setShowSignup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const navigate = useNavigate();
+
+  // Track mouse position for gradient effect
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
 
   // Check for token and navigate if valid
   useEffect(() => {
@@ -16,218 +40,532 @@ const Login = ({ isDarkMode, toggleDarkMode }) => {
     if (token) {
       navigate("/module");
     }
+    setIsPageLoaded(true);
   }, [navigate]);
 
-  // Handle input changes
+  // Don't render anything until initial load is complete
+  if (!isPageLoaded) {
+    return null;
+  }
+
+  // Handle input changes with animation
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError(""); // Clear error when the user starts typing
+    setError("");
+    setSuccess("");
   };
 
-  // Handle form submission
+  // Login form validation
+  const validateLoginForm = () => {
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return false;
+    }
+
+    return true;
+  };
+
+  // Signup form validation with enhanced password security
+  const validateSignupForm = () => {
+    const { email, username, password, confirmPassword } = formData;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return false;
+    }
+
+    if (!usernameRegex.test(username)) {
+      setError("Username must be 3-20 characters and can only contain letters, numbers and underscores");
+      return false;
+    }
+
+    if (!passwordRegex.test(password)) {
+      setError("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character");
+      return false;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return false;
+    }
+
+    return true;
+  };
+
+  // Handle login form submission with success animation
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateLoginForm()) return;
+    setIsLoading(true);
+
     try {
-      const response = await axios.post("http://localhost:5000/api/login", formData);
+      const response = await axios.post("http://localhost:5000/api/login", {
+        email: formData.email,
+        password: formData.password
+      });
 
       if (response.data.success) {
-        localStorage.setItem("token", "dummy_token_for_now"); // Replace with actual token
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.username);
         navigate("/module");
       } else {
-        setError("Invalid username or password. Please contact support.");
+        setError(response.data.message || "Invalid credentials. Please try again.");
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError("Login failed. Please try again later.");
+      
+      if (!navigator.onLine) {
+        setError("Unable to connect. Please check your internet connection.");
+      } else if (err.response) {
+        // Server responded with error
+        if (err.response.data && err.response.data.message) {
+          setError(err.response.data.message);
+        } else if (err.response.status === 500) {
+          setError("Server error occurred. Please try again later.");
+        } else {
+          setError("Invalid credentials or server error. Please try again.");
+        }
+      } else if (err.request) {
+        // Request made but no response
+        setError("No response from server. Please check your connection and try again.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Open "Coming Soon" popup
-  const openComingSoonPopup = (e) => {
+  // Handle signup form submission with enhanced feedback
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    setIsComingSoonOpen(true);
+    
+    if (!validateSignupForm()) return;
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/signup", {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      });
+
+      if (response.data.success) {
+        setSuccess("Account created successfully! Please login.");
+        setError("");
+        setTimeout(() => {
+          setShowSignup(false);
+          setFormData({ email: "", password: "", username: "", confirmPassword: "" });
+          setSuccess("");
+        }, 2000);
+      } else {
+        setError(response.data.message || "Failed to create account. Please try again.");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      
+      if (!navigator.onLine) {
+        setError("Unable to connect. Please check your internet connection.");
+      } else if (err.response) {
+        // Server responded with error
+        if (err.response.data && err.response.data.message) {
+          setError(err.response.data.message);
+        } else if (err.response.status === 500) {
+          setError("Server error occurred. Please try again later.");
+        } else if (err.response.status === 409) {
+          setError("Email or username already exists. Please try another.");
+        } else {
+          setError("Signup failed. Please try again with different credentials.");
+        }
+      } else if (err.request) {
+        // Request made but no response
+        setError("No response from server. Please check your connection and try again.");
+      } else {
+        setError("An unexpected error occurred during signup. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Close "Coming Soon" popup
-  const closeComingSoonPopup = () => {
-    setIsComingSoonOpen(false);
+  // Toggle between Login and Signup with animation
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
+    setError("");
+    setSuccess("");
+    setFormData({ email: "", password: "", username: "", confirmPassword: "" });
   };
 
   return (
-    <div
-      className={`min-h-screen transition-all duration-300 relative ${
+    <div 
+      className={`min-h-screen transition-all duration-700 relative overflow-hidden ${
         isDarkMode
-          ? "bg-gradient-to-br from-slate-900 to-slate-800 text-gray-100"
-          : "bg-gradient-to-br from-blue-50 to-blue-100 text-gray-900"
+          ? "bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900"
+          : "bg-gradient-to-br from-blue-50 via-indigo-100 to-blue-100"
       }`}
     >
-      {/* Coming Soon Popup */}
-      {isComingSoonOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-          onClick={closeComingSoonPopup}
-        >
-          <div
-            className={`w-96 p-8 rounded-2xl shadow-2xl transform transition-all duration-300 ${
-              isDarkMode ? "bg-slate-800 text-white" : "bg-white text-gray-900"
-            } scale-100 opacity-100 hover:scale-105`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-center mb-6">
-              <Info
-                className={`w-16 h-16 ${
-                  isDarkMode ? "text-emerald-400" : "text-emerald-600"
-                }`}
-              />
-            </div>
-            <h2 className="text-2xl font-bold text-center mb-4">Coming Soon!</h2>
-            <p
-              className={`text-center mb-6 ${
-                isDarkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              We're working on the Create Account feature. Stay tuned for an easy registration process.
-            </p>
-            <button
-              onClick={closeComingSoonPopup}
-              className={`w-full py-3 rounded-full transition-all duration-300 ${
-                isDarkMode
-                  ? "bg-emerald-700 hover:bg-emerald-600 text-white"
-                  : "bg-emerald-500 hover:bg-emerald-600 text-white"
-              }`}
-            >
-              Understood
-            </button>
-          </div>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute w-full h-full">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className={`absolute rounded-full ${
+                isDarkMode ? "bg-blue-500" : "bg-white"
+              } opacity-20 animate-float`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 10 + 5}px`,
+                height: `${Math.random() * 10 + 5}px`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${Math.random() * 10 + 10}s`
+              }}
+            />
+          ))}
         </div>
-      )}
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 animate-pulse"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+      </div>
 
-<header className={`relative overflow-hidden ${isDarkMode ? 'bg-[#1a1f36]' : 'bg-blue-600'}`}>
-        <nav className="container mx-auto px-6 py-4 relative z-10">
+      <header className="relative z-10 backdrop-blur-lg bg-opacity-80">
+        <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-          <a href="/">
-            <div className="flex items-center space-x-2">
-              <Shield className="w-8 h-8 text-emerald-400" />
-              <span className="text-xl font-bold text-white">CyberGuard</span>
-            </div>
+            <a 
+              href="/" 
+              className="group flex items-center space-x-2 transition-all duration-300 hover:scale-105"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <Shield className={`w-8 h-8 text-emerald-400 transition-all duration-300 ${
+                isHovering ? 'animate-pulse rotate-12' : ''
+              }`} />
+              <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+                CyberGuard
+              </span>
+              {isHovering && (
+                <Sparkles className="w-5 h-5 text-yellow-400 animate-spin" />
+              )}
             </a>
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full hover:bg-opacity-20 hover:bg-gray-700 transition-colors"
-                aria-label="Toggle dark mode"
-              >
-                {isDarkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-white" />}
-              </button>
-        
-            </div>
+            <button
+              onClick={toggleDarkMode}
+              className="p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
+                       hover:shadow-lg hover:scale-110 group"
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? 
+                <Sun className="w-5 h-5 text-yellow-300 group-hover:rotate-180 transition-transform duration-500" /> : 
+                <Moon className="w-5 h-5 text-blue-600 group-hover:rotate-180 transition-transform duration-500" />
+              }
+            </button>
           </div>
         </nav>
       </header>
 
-      {/* Rest of the Login Component */}
-      <section className="py-20 flex items-center justify-center px-4">
-        <div
-          className={`w-full max-w-md p-10 rounded-2xl shadow-2xl transition-all ${
-            isDarkMode
-              ? "bg-slate-800 border border-slate-700"
-              : "bg-white border border-blue-100"
-          }`}
+      <section className="relative z-10 py-20 px-4 flex items-center justify-center">
+        <div 
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          className={`w-full max-w-md p-8 rounded-2xl transition-all duration-500 transform hover:scale-[1.02]
+            ${isDarkMode 
+              ? "bg-slate-800/70 backdrop-blur-xl border border-slate-700/50 shadow-2xl shadow-emerald-500/10" 
+              : "bg-white/70 backdrop-blur-xl border border-blue-100 shadow-2xl shadow-blue-500/10"
+            }`}
+          style={{
+            background: isDarkMode 
+              ? `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(16, 185, 129, 0.15), transparent 30%)`
+              : `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 30%)`
+          }}
         >
-          <h2 className="text-4xl font-bold text-center mb-10 tracking-tight">Login</h2>
+          {/* Form Header with Enhanced Animation */}
+          <div className="relative mb-8 text-center">
+            {showSignup && (
+              <button 
+                onClick={toggleSignup}
+                className="absolute left-0 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-opacity-20 
+                         hover:bg-slate-500 transition-all duration-300 hover:scale-110"
+              >
+                <ArrowLeft className={`
+                  ${isDarkMode ? "text-slate-400" : "text-gray-600"}
+                  transform transition-transform hover:-translate-x-1
+                `} />
+              </button>
+            )}
+            <h2 className={`text-4xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent
+              transition-all duration-300 ${isHovering ? 'scale-105' : ''}`}>
+              {showSignup ? "Create Account" : "Welcome Back"}
+            </h2>
+            <p className={`mt-2 ${isDarkMode ? "text-slate-400" : "text-gray-600"} transition-opacity duration-300`}>
+              {showSignup ? "Join our cybersecurity community" : "Secure your digital presence"}
+            </p>
+          </div>
 
+          {/* Enhanced Error Message */}
           {error && (
-            <div
-              className={`mb-6 p-4 rounded-lg ${
-                isDarkMode
-                  ? "bg-red-900/50 text-red-200 border border-red-800"
-                  : "bg-red-100 text-red-800 border border-red-200"
-              }`}
-            >
-              {error}
+            <div className={`mb-6 p-4 rounded-lg animate-shake ${
+              isDarkMode
+                ? "bg-red-900/30 text-red-200 border border-red-800/50"
+                : "bg-red-100 text-red-800 border border-red-200"
+            } transform transition-all duration-300 hover:scale-[1.02]`}>
+              <p className="flex items-center">
+                <span className="mr-2 animate-bounce">⚠️</span>
+                {error}
+              </p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Username Input */}
-            <div className="relative group">
-              <Mail
-                className={`absolute left-3 top-1/2 -translate-y-1/2 ${
-                  isDarkMode ? "text-slate-400" : "text-gray-400"
-                } group-focus-within:text-emerald-500 transition-colors`}
-              />
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-                className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 focus:outline-none focus:border-emerald-500 transition-all ${
-                  isDarkMode
-                    ? "bg-slate-700 border-slate-600 text-white"
-                    : "bg-white border-gray-300 text-gray-900"
-                }`}
-              />
+          {/* Success Message */}
+          {success && (
+            <div className={`mb-6 p-4 rounded-lg ${
+              isDarkMode
+                ? "bg-green-900/30 text-green-200 border border-green-800/50"
+                : "bg-green-100 text-green-800 border border-green-200"
+            } transform transition-all duration-300 hover:scale-[1.02]`}>
+              <p className="flex items-center">
+                <span className="mr-2">✅</span>
+                {success}
+              </p>
             </div>
+          )}
 
-            {/* Password Input */}
-            <div className="relative group">
-              <Lock
-                className={`absolute left-3 top-1/2 -translate-y-1/2 ${
-                  isDarkMode ? "text-slate-400" : "text-gray-400"
-                } group-focus-within:text-emerald-500 transition-colors`}
-              />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                className={`w-full pl-10 pr-12 py-3 rounded-lg border-2 focus:outline-none focus:border-emerald-500 transition-all ${
-                  isDarkMode
-                    ? "bg-slate-700 border-slate-600 text-white"
-                    : "bg-white border-gray-300 text-gray-900"
-                }`}
-              />
+          {!showSignup ? (
+            // Enhanced Login Form
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-4">
+                <div className="relative group">
+                  <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                </div>
+
+                <div className="relative group">
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-12 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                      ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                      hover:text-emerald-500 hover:scale-110`}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
               <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className={`absolute right-3 top-1/2 -translate-y-1/2 ${
-                  isDarkMode ? "text-slate-400" : "text-gray-400"
-                } hover:text-emerald-500 transition-colors`}
+                type="submit"
+                disabled={isLoading}
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-500
+                  ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:scale-105"}
+                  bg-gradient-to-r from-emerald-500 to-blue-500 text-white
+                  shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50
+                  hover:from-emerald-600 hover:to-blue-600
+                  flex items-center justify-center space-x-2
+                  transform hover:-translate-y-1`}
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {isLoading ? (
+                  <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <span>Login</span>
+                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
-            </div>
+            </form>
+          ) : (
+            // Enhanced Signup Form
+            <form onSubmit={handleSignupSubmit} className="space-y-6">
+              <div className="space-y-4">
+                <div className="relative group">
+                  <User className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-full transition-all duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center"
+                <div className="relative group">
+                  <Mail className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                </div>
+
+                <div className="relative group">
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-12 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                      ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                      hover:text-emerald-500 hover:scale-110`}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+
+                <div className="relative group">
+                  <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                    ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                    group-hover:text-emerald-500 group-hover:scale-110`}
+                  />
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full pl-10 pr-12 py-3 rounded-lg border-2 transition-all duration-300
+                      ${isDarkMode
+                        ? "bg-slate-700/50 border-slate-600 text-white placeholder-slate-400"
+                        : "bg-white/50 border-gray-200 text-gray-900 placeholder-gray-400"
+                      }
+                      focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/50
+                      hover:shadow-lg hover:scale-[1.01]`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className={`absolute right-3 top-1/2 -translate-y-1/2 transition-all duration-300
+                      ${isDarkMode ? "text-slate-400" : "text-gray-400"}
+                      hover:text-emerald-500 hover:scale-110`}
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-500
+                  ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:scale-105"}
+                  bg-gradient-to-r from-emerald-500 to-blue-500 text-white
+                  shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50
+                  hover:from-emerald-600 hover:to-blue-600
+                  flex items-center justify-center space-x-2
+                  transform hover:-translate-y-1`}
+              >
+                {isLoading ? (
+                  <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <span>Create Account</span>
+                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+
+          {/* Enhanced Toggle Link */}
+          <div className="mt-6 text-center">
+            <button 
+              onClick={toggleSignup}
+              className={`text-sm font-medium transition-all duration-300 hover:scale-110
+                ${isDarkMode 
+                  ? "text-emerald-400 hover:text-emerald-300" 
+                  : "text-blue-600 hover:text-blue-700"}
+                transform hover:-translate-y-1`}
             >
-              Login
-              <ChevronRight className="ml-2" />
+              {showSignup ? "Already have an account? Login" : "New to CyberGuard? Sign up"}
             </button>
-          </form>
-
-          <div className="text-center mt-6">
-            <a
-              href="#"
-              onClick={openComingSoonPopup}
-              className={`text-sm font-medium ${
-                isDarkMode ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-700"
-              } transition-colors`}
-            >
-              Create Account
-            </a>
           </div>
         </div>
       </section>
     </div>
   );
-};
+})
 
 export default Login;
