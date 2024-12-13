@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Sun, Moon, Trash2, Bot, User, Loader, ArrowLeft, Send, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -14,7 +14,7 @@ const Chat = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(localStorage.getItem('username') || 'guest');
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [markdownPreview, setMarkdownPreview] = useState('');
@@ -23,6 +23,7 @@ const Chat = () => {
   const inputRef = useRef(null);
   const { darkMode, setDarkMode } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ 
@@ -54,33 +55,36 @@ const Chat = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login', { replace: true });
-      return;
-    }
-
-    const verifyToken = async () => {
-      try {
-        const res = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        if (!res.ok) throw new Error('Token invalid');
-        const storedUsername = localStorage.getItem('username');
-        if (storedUsername) {
-          setUsername(storedUsername);
-          setMessages([{
-            text: `# Welcome back ${storedUsername}! 👋\n\nI'm your CyberGuard AI Assistant, ready to help you with all things cybersecurity. What would you like to learn about today?`,
-            sender: 'ai',
-            timestamp: new Date().toISOString()
-          }]);
+    if (token) {
+      const verifyToken = async () => {
+        try {
+          const res = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (!res.ok) throw new Error('Token invalid');
+          const storedUsername = localStorage.getItem('username');
+          if (storedUsername) {
+            setUsername(storedUsername);
+            setMessages([{
+              text: `# Welcome back ${storedUsername}! 👋\n\nI'm your CyberGuard AI Assistant, ready to help you with all things cybersecurity. What would you like to learn about today?`,
+              sender: 'ai',
+              timestamp: new Date().toISOString()
+            }]);
+          }
+        } catch (err) {
+          console.error('Token verification failed:', err);
+          localStorage.removeItem('token');
+          navigate('/login', { replace: true });
         }
-      } catch (err) {
-        console.error('Token verification failed:', err);
-        localStorage.removeItem('token');
-        navigate('/login', { replace: true });
-      }
-    };
-    verifyToken();
+      };
+      verifyToken();
+    } else {
+      setMessages([{
+        text: `# Welcome guest! 👋\n\nI'm your CyberGuard AI Assistant, ready to help you with all things cybersecurity. What would you like to learn about today?`,
+        sender: 'ai',
+        timestamp: new Date().toISOString()
+      }]);
+    }
   }, [navigate]);
 
   const toggleDarkMode = () => {
@@ -113,11 +117,6 @@ const Chat = () => {
 
     try {
       const token = localStorage.getItem('token');
-      if (!token) {
-        navigate('/login', { replace: true });
-        return;
-      }
-
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
         method: 'POST',
         headers: {
@@ -266,16 +265,29 @@ const Chat = () => {
             darkMode ? 'bg-slate-800/40 hover:bg-slate-800/50' : 'bg-white/70 hover:bg-white/80'
           }`}
         >
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2 sm:space-x-3 cursor-pointer" 
-            onClick={() => navigate('/module')}
-          >
-            <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 animate-pulse" />
-            <h1 className={`text-lg sm:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent`}>
-              CyberGuard AI
-            </h1>
-          </motion.div>
+          <div className="flex items-center space-x-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate(-1)}
+              className={`p-2 sm:p-3 rounded-full transition-all duration-300 ${
+                darkMode ? 'text-gray-300 hover:bg-slate-700' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              title="Go Back"
+            >
+              <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </motion.button>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 sm:space-x-3 cursor-pointer" 
+              onClick={() => navigate('/module')}
+            >
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 animate-pulse" />
+              <h1 className={`text-lg sm:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent`}>
+                CyberGuard AI
+              </h1>
+            </motion.div>
+          </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
             <motion.button
               whileHover={{ scale: 1.1 }}

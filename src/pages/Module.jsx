@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
-import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles, CheckCircle, LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles, CheckCircle, LogOut, Bot } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
 const Module = () => {
@@ -33,7 +32,6 @@ const Module = () => {
       return;
     }
 
-    
     const verifyToken = async () => {
       try {
         const verifyResponse = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
@@ -46,7 +44,6 @@ const Module = () => {
           throw new Error('Token verification failed');
         }
 
-      
         const response = await fetch('https://cyberguard-hc2y.onrender.com/api/progress', {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -62,7 +59,7 @@ const Module = () => {
         setIsLoading(false);
       } catch (err) {
         console.error('Error:', err);
-        localStorage.removeItem('token'); // Clear invalid token
+        localStorage.removeItem('token');
         navigate('/login', { replace: true });
       }
     };
@@ -88,83 +85,83 @@ const Module = () => {
   const modules = [
     {
       title: 'Cybersecurity Fundamentals',
-      description: 'This module introduces students to the basics of cybersecurity, including security principles, types of cyber threats, and the importance of cybersecurity in everyday life.',
+      description: 'Learn the basics of cybersecurity, including key principles, common threats, and essential security practices.',
       progress: progress.progress1 * 100,
       lesson: 1,
-      icon: <AlertTriangle className="w-6 h-6 text-orange-400" />
+      icon: <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
     },
     {
-      title: 'Network Security and Firewalls', 
-      description: 'This module covers the basics of network security, including firewalls, intrusion detection systems, and virtual private networks (VPNs). Students will learn how to configure and manage firewalls to protect against unauthorized access.',
+      title: 'Network Security',
+      description: 'Master network security concepts including firewalls, IDS, and VPNs. Learn practical configuration skills.',
       progress: progress.progress2 * 100,
       lesson: 2,
-      icon: <Globe className="w-6 h-6 text-blue-400" />
+      icon: <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
     },
     {
-      title: 'Malware and Anti-Virus Software',
-      description: 'This module focuses on malware, including viruses, worms, and ransomware. Students will learn about the different types of malware, how they spread, and how to protect against them using anti-virus software.',
+      title: 'Malware Protection',
+      description: 'Understand different malware types and learn effective protection strategies using anti-virus tools.',
       progress: progress.progress3 * 100,
       lesson: 3,
-      icon: <MessageCircle className="w-6 h-6 text-purple-400" />
+      icon: <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
     },
     {
-      title: 'Social Engineering and Phishing',
-      description: 'This module explores social engineering tactics, including phishing, pretexting, and baiting. Students will learn how to identify and avoid these types of attacks, and how to protect themselves and their organizations.',
+      title: 'Social Engineering',
+      description: 'Learn to identify and prevent social engineering attacks like phishing and pretexting.',
       progress: progress.progress4 * 100,
       lesson: 4,
-      icon: <Lock className="w-6 h-6 text-red-400" />
+      icon: <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />
     },
     {
-      title: 'Cybersecurity Threats and Risk Management',
-      description: 'This module covers various types of cybersecurity threats, including DDoS attacks, amplification attacks, and man-in-the-middle (MitM) attacks. Students will learn how to identify and mitigate these threats, and how to develop a risk management plan.',
+      title: 'Threat Management',
+      description: 'Study cyber threats and develop risk management strategies for better security.',
       progress: progress.progress5 * 100,
       lesson: 5,
-      icon: <Database className="w-6 h-6 text-green-400" />
+      icon: <Database className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
     },
     {
-      title: 'Cybersecurity Best Practices and Career Paths',
-      description: 'This module provides an overview of cybersecurity best practices, including password management, data encryption, and secure online behavior. Students will also learn about different career paths in cybersecurity and how to get started in the field.',
+      title: 'Security Career Guide',
+      description: 'Explore cybersecurity best practices and discover career opportunities in the field.',
       progress: progress.progress6 * 100,
       lesson: 6,
-      icon: <Key className="w-6 h-6 text-yellow-400" />
+      icon: <Key className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
     }
   ];
 
   const sections = [
     {
-      title: 'Security Coach AI',
-      icon: <MessageCircle className="w-6 h-6 text-emerald-400" />,
-      description: 'Get real-time advice on suspicious emails, links, and potential security threats',
+      title: 'AI Security Coach',
+      icon: <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />,
+      description: 'Get instant AI-powered security advice and threat analysis',
       bgGradient: 'from-emerald-500/20 to-teal-500/20'
     },
     {
-      title: 'Incident Reports',
-      icon: <Download className="w-6 h-6 text-blue-400" />,
-      description: 'Access real case studies of security incidents and lessons learned from them',
+      title: 'Security Reports',
+      icon: <Download className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />,
+      description: 'Access detailed security incident reports and analysis',
       bgGradient: 'from-blue-500/20 to-indigo-500/20'
     },
     {
-      title: 'Emergency Response',
-      icon: <HelpCircle className="w-6 h-6 text-red-400" />,
-      description: "Step-by-step guides on what to do if you suspect your account has been compromised",
+      title: 'Quick Response',
+      icon: <HelpCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />,
+      description: 'Emergency response guides for security incidents',
       bgGradient: 'from-red-500/20 to-orange-500/20'
     },
     {
-      title: 'Security Checkup',
-      icon: <Lock className="w-6 h-6 text-purple-400" />,
-      description: 'Interactive tools to assess your current security practices and vulnerabilities',
+      title: 'Security Check',
+      icon: <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />,
+      description: 'Evaluate your security practices and find gaps',
       bgGradient: 'from-purple-500/20 to-pink-500/20'
     },
     {
-      title: 'Threat Radar',
-      icon: <AlertTriangle className="w-6 h-6 text-yellow-400" />,
-      description: 'Live feed of emerging cyber threats and scams in your region',
+      title: 'Threat Alert',
+      icon: <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />,
+      description: 'Real-time updates on emerging security threats',
       bgGradient: 'from-yellow-500/20 to-amber-500/20'
     },
     {
       title: 'Best Practices',
-      icon: <FileText className="w-6 h-6 text-cyan-400" />,
-      description: 'Industry-standard security protocols and everyday safety guidelines',
+      icon: <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />,
+      description: 'Learn industry-standard security guidelines',
       bgGradient: 'from-cyan-500/20 to-sky-500/20'
     }
   ];
@@ -175,7 +172,7 @@ const Module = () => {
         <div className={`min-h-screen flex items-center justify-center ${
           darkMode ? 'bg-slate-900' : 'bg-blue-50'
         }`}>
-          <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <div className={`min-h-screen transition-all duration-700 relative overflow-hidden ${
@@ -209,7 +206,7 @@ const Module = () => {
 
           {/* Header */}
           <header className="relative z-10 backdrop-blur-lg bg-opacity-80">
-            <nav className="container mx-auto px-6 py-4">
+            <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
               <div className="flex items-center justify-between">
                 <a 
                   href="/" 
@@ -217,39 +214,39 @@ const Module = () => {
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                 >
-                  <Shield className={`w-8 h-8 text-emerald-400 transition-all duration-300 ${
+                  <Shield className={`w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 transition-all duration-300 ${
                     isHovering ? 'animate-pulse rotate-12' : ''
                   }`} />
-                  <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+                  <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
                     CyberGuard
                   </span>
                   {isHovering && (
-                    <Sparkles className="w-5 h-5 text-yellow-400 animate-spin" />
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 animate-spin" />
                   )}
                 </a>
-                <div className="flex items-center space-x-4">
-                  <div className={`px-4 py-2 rounded-full backdrop-blur-lg transition-all duration-300
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <div className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full backdrop-blur-lg transition-all duration-300
                     ${darkMode ? 'bg-slate-700/50 text-white' : 'bg-white/50 text-gray-900'}`}>
-                    <span className="font-medium">Hi, {username || 'User'}</span>
+                    <span className="text-sm sm:text-base font-medium">Hi, {username || 'User'}</span>
                   </div>
                   <button
                     onClick={() => setDarkMode(!darkMode)}
-                    className="p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
+                    className="p-2 sm:p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
                              hover:shadow-lg hover:scale-110 group"
                     aria-label="Toggle dark mode"
                   >
                     {darkMode ? 
-                      <Sun className="w-5 h-5 text-yellow-300 group-hover:rotate-180 transition-transform duration-500" /> : 
-                      <Moon className="w-5 h-5 text-blue-600 group-hover:rotate-180 transition-transform duration-500" />
+                      <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 group-hover:rotate-180 transition-transform duration-500" /> : 
+                      <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 group-hover:rotate-180 transition-transform duration-500" />
                     }
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
+                    className="p-2 sm:p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
                              hover:shadow-lg hover:scale-110 group"
                     aria-label="Logout"
                   >
-                    <LogOut className={`w-5 h-5 ${darkMode ? 'text-red-400' : 'text-red-500'} 
+                    <LogOut className={`w-4 h-4 sm:w-5 sm:h-5 ${darkMode ? 'text-red-400' : 'text-red-500'} 
                       group-hover:rotate-12 transition-transform duration-300`} />
                   </button>
                 </div>
@@ -258,47 +255,47 @@ const Module = () => {
           </header>
 
           {/* Modules Section */}
-          <section className="relative z-10 py-16 px-4">
+          <section className="relative z-10 py-8 sm:py-16 px-4">
             <div className="container mx-auto">
-              <h2 className={`text-4xl font-bold text-center mb-4 ${
+              <h2 className={`text-2xl sm:text-4xl font-bold text-center mb-2 sm:mb-4 ${
                 darkMode ? 'text-white' : 'text-gray-900'
               }`}>
                 Security Awareness Training
               </h2>
-              <p className={`text-center mb-12 max-w-2xl mx-auto ${
+              <p className={`text-sm sm:text-base text-center mb-8 sm:mb-12 max-w-2xl mx-auto ${
                 darkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 Master essential cybersecurity skills through interactive lessons and real-world scenarios
               </p>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {modules.map((module, index) => (
                   <div
                     key={index}
-                    className={`p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl relative
+                    className={`p-4 sm:p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl relative
                       ${darkMode 
                         ? 'bg-slate-800/30 hover:bg-slate-700/40' 
                         : 'bg-white/70 hover:bg-white/90'}`}
                   >
                     {module.progress === 100 && (
-                      <div className="absolute -top-3 -right-3 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full p-2 shadow-lg transform rotate-12 hover:rotate-0 transition-all duration-300">
-                        <CheckCircle className="w-5 h-5 text-white" />
+                      <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full p-1.5 sm:p-2 shadow-lg transform rotate-12 hover:rotate-0 transition-all duration-300">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </div>
                     )}
-                    <div className="flex items-center space-x-3 mb-4">
+                    <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
                       {module.icon}
-                      <h3 className={`text-xl font-semibold ${
+                      <h3 className={`text-base sm:text-xl font-semibold ${
                         darkMode ? 'text-white' : 'text-gray-900'
                       }`}>
                         {module.title}
                       </h3>
                     </div>
-                    <p className={`mb-6 ${
+                    <p className={`text-sm sm:text-base mb-4 sm:mb-6 ${
                       darkMode ? 'text-gray-300' : 'text-gray-600'
                     }`}>
                       {module.description}
                     </p>
-                    <div className="relative w-full bg-gray-600/30 rounded-full h-2 mb-4 group">
+                    <div className="relative w-full bg-gray-600/30 rounded-full h-1.5 sm:h-2 mb-3 sm:mb-4 group">
                       <div
                         className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 transition-all duration-300"
                         style={{ width: `${module.progress}%` }}
@@ -310,7 +307,7 @@ const Module = () => {
                     </div>
                     <button 
                       onClick={() => navigate(`/module/${module.lesson}`)}
-                      className="w-full py-3 rounded-lg font-semibold transition-all duration-500
+                      className="w-full py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-all duration-500
                         bg-gradient-to-r from-emerald-500 to-blue-500 text-white
                         shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50
                         hover:from-emerald-600 hover:to-blue-600
@@ -318,7 +315,7 @@ const Module = () => {
                         transform hover:-translate-y-1"
                     >
                       <span>{module.progress === 100 ? 'Review Module' : 'Start Training'}</span>
-                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 ))}
@@ -327,26 +324,26 @@ const Module = () => {
           </section>
 
           {/* Additional Features */}
-          <section className="relative z-10 py-16 px-4">
+          <section className="relative z-10 py-8 sm:py-16 px-4">
             <div className="container mx-auto">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {sections.map((section, index) => (
                   <div
                     key={index}
-                    className={`p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 
+                    className={`p-4 sm:p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 
                       bg-gradient-to-br ${section.bgGradient} cursor-pointer
                       ${darkMode ? 'hover:bg-opacity-30' : 'hover:bg-opacity-70'}`}
                     onMouseMove={handleMouseMove}
                   >
-                    <div className="flex items-center mb-4">
+                    <div className="flex items-center mb-3 sm:mb-4">
                       {section.icon}
-                      <h3 className={`text-xl font-semibold ml-3 ${
+                      <h3 className={`text-base sm:text-xl font-semibold ml-2 sm:ml-3 ${
                         darkMode ? 'text-white' : 'text-gray-900'
                       }`}>
                         {section.title}
                       </h3>
                     </div>
-                    <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
+                    <p className={`text-sm sm:text-base ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {section.description}
                     </p>
                   </div>
@@ -355,19 +352,30 @@ const Module = () => {
             </div>
           </section>
 
+          {/* Chat Button */}
+          <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50">
+            <Link 
+              to="/chat" 
+              className={`flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transition-transform transform hover:scale-110`}
+              aria-label="Chat with us"
+            >
+              <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            </Link>
+          </div>
+
           {/* Footer */}
-          <footer className="relative z-10 py-8 backdrop-blur-lg bg-opacity-80">
-            <div className="container mx-auto px-6">
-              <div className="flex flex-col md:flex-row justify-between items-center">
-                <div className="flex items-center space-x-2 mb-4 md:mb-0">
-                  <Shield className="w-6 h-6 text-emerald-400" />
-                  <span className={`font-semibold ${
+          <footer className="relative z-10 py-6 sm:py-8 backdrop-blur-lg bg-opacity-80">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="flex flex-col sm:flex-row justify-between items-center">
+                <div className="flex items-center space-x-2 mb-3 sm:mb-0">
+                  <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+                  <span className={`text-sm sm:text-base font-semibold ${
                     darkMode ? 'text-white' : 'text-gray-900'
                   }`}>
                     CyberGuard
                   </span>
                 </div>
-                <div className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
+                <div className={`text-xs sm:text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                   © 2024 CyberGuard. All rights reserved.
                 </div>
               </div>

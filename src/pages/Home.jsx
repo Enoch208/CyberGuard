@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Book, Brain, Users, ChevronRight, Sun, Moon, ShieldCheck, Trophy, Lock, Eye, MessageCircle } from 'lucide-react';
+import { Shield, Book, Brain, Users, ChevronRight, Sun, Moon, ShieldCheck, Trophy, Lock, Eye, MessageCircle, Bot } from 'lucide-react'; // Added Bot icon
 import Footer from '../components/Footer';
 import { useTheme } from '../context/ThemeContext';
 import { Link } from 'react-router-dom';
@@ -304,28 +304,20 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Chat Button */}
       <div className="fixed bottom-5 right-5 z-50">
-        <button 
-          onClick={() => setIsChatOpen(!isChatOpen)} 
-          className={`flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transition-transform transform hover:scale-110`}
+        <Link 
+          to="/chat" 
+          className={`flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg transition-transform transform hover:scale-110`}
           aria-label="Chat with us"
         >
-          <MessageCircle className="w-6 h-6" />
-        </button>
-        {isChatOpen && (
-          <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-            <h3 className="font-semibold text-lg">Chat with us!</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300">How can we assist you today?</p>
-            {/* Chat input or options can be added here */}
-          </div>
-        )}
+          <Bot className="w-8 h-8 text-white" />
+        </Link>
       </div>
 
       <Footer />
     </div>
   );
-};
+}
 
 export default Home;
