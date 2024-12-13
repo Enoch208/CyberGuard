@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles, CheckCircle } from 'lucide-react';
+import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles, CheckCircle, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
@@ -19,6 +19,12 @@ const Module = () => {
     progress5: 0,
     progress6: 0
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/login', { replace: true });
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -236,6 +242,15 @@ const Module = () => {
                       <Sun className="w-5 h-5 text-yellow-300 group-hover:rotate-180 transition-transform duration-500" /> : 
                       <Moon className="w-5 h-5 text-blue-600 group-hover:rotate-180 transition-transform duration-500" />
                     }
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="p-2.5 rounded-full bg-opacity-20 hover:bg-opacity-30 backdrop-blur-lg transition-all duration-300
+                             hover:shadow-lg hover:scale-110 group"
+                    aria-label="Logout"
+                  >
+                    <LogOut className={`w-5 h-5 ${darkMode ? 'text-red-400' : 'text-red-500'} 
+                      group-hover:rotate-12 transition-transform duration-300`} />
                   </button>
                 </div>
               </div>
