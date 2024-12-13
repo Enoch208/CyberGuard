@@ -1,0 +1,1029 @@
+{
+    "lesson1": {
+      "id": 1,
+      "title": "Lesson 1 Quiz: Cybersecurity Chronicles",
+      "questions": [
+        {
+          "question": "What is the primary goal of cybersecurity?",
+          "options": [
+            "A. To make the internet faster",
+            "B. To protect digital information and systems",
+            "C. To create new software",
+            "D. To increase social media usage"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is NOT a core principle of cybersecurity?",
+          "options": [
+            "A. Confidentiality",
+            "B. Integrity",
+            "C. Availability",
+            "D. Profitability"
+          ],
+          "answer": "D"
+        },
+        {
+          "question": "What does 'Confidentiality' in cybersecurity mean?",
+          "options": [
+            "A. Ensuring data is accurate and unaltered",
+            "B. Ensuring data is available when needed",
+            "C. Keeping information private and secure",
+            "D. Making data accessible to everyone"
+          ],
+          "answer": "C"
+        },
+        {
+          "question": "Which of the following best describes 'Integrity' in cybersecurity?",
+          "options": [
+            "A. Ensuring data is accurate and unaltered",
+            "B. Keeping information private and secure",
+            "C. Ensuring data is available when needed",
+            "D. Making data accessible to everyone"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is 'Availability' in the context of cybersecurity?",
+          "options": [
+            "A. Ensuring data is accurate and unaltered",
+            "B. Keeping information private and secure",
+            "C. Ensuring data is available when needed",
+            "D. Making data accessible to everyone"
+          ],
+          "answer": "C"
+        },
+        {
+          "question": "Which of the following is an example of a phishing attack?",
+          "options": [
+            "A. A fake email asking for your password",
+            "B. A virus that deletes files",
+            "C. A worm that spreads across networks",
+            "D. Ransomware that locks your files"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is malware?",
+          "options": [
+            "A. A type of software that protects your computer",
+            "B. Harmful programs pretending to be useful",
+            "C. A secure way to share files",
+            "D. A method of encrypting data"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is NOT a type of malware?",
+          "options": [
+            "A. Virus",
+            "B. Worm",
+            "C. Ransomware",
+            "D. Firewall"
+          ],
+          "answer": "D"
+        },
+        {
+          "question": "What is social engineering in the context of cybersecurity?",
+          "options": [
+            "A. Using social media to promote security",
+            "B. Scammers pretending to be someone trustworthy to get private information",
+            "C. Encrypting data before sharing",
+            "D. Using strong passwords"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is a good practice for creating strong passwords?",
+          "options": [
+            "A. Using '123456' for all accounts",
+            "B. Using unique passwords like 'Sunset!45&Wave'",
+            "C. Using your birthdate",
+            "D. Using the same password for multiple sites"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is Two-Factor Authentication (2FA)?",
+          "options": [
+            "A. A method of encrypting data",
+            "B. An extra layer of security requiring a code sent to your phone",
+            "C. A type of malware",
+            "D. A way to create strong passwords"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to avoid clicking on suspicious links?",
+          "options": [
+            "A. They can make your internet slower",
+            "B. They can lead to malware infections",
+            "C. They can increase your social media followers",
+            "D. They can improve your computer's performance"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What should you do if you receive a suspicious email from a coworker?",
+          "options": [
+            "A. Open the attachment to see what it is",
+            "B. Delete it immediately",
+            "C. Forward it to your friends",
+            "D. Reply to the email asking for more information"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you protect your data from being altered by unauthorized users?",
+          "options": [
+            "A. By using strong passwords",
+            "B. By ensuring data integrity",
+            "C. By sharing your passwords with trusted friends",
+            "D. By using public Wi-Fi"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the role of an ethical hacker?",
+          "options": [
+            "A. To create viruses",
+            "B. To find security weaknesses before real hackers do",
+            "C. To steal data",
+            "D. To promote social media security"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is cybersecurity important for everyone, not just tech professionals?",
+          "options": [
+            "A. Because everyone uses technology and faces potential threats",
+            "B. Because it makes the internet faster",
+            "C. Because it increases social media usage",
+            "D. Because it is only important for large companies"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a common method used by cybercriminals to gain access to sensitive information?",
+          "options": [
+            "A. Sending legitimate emails",
+            "B. Social engineering",
+            "C. Using strong passwords",
+            "D. Encrypting data"
+          ],
+          "answer": "B"
+        }
+      ]
+    }
+  ,
+    "lesson2": {
+      "id": 2,
+      "title": "Lesson 2 Quiz: Network Security and Firewalls",
+      "questions": [
+        {
+          "question": "What is the primary function of a firewall?",
+          "options": [
+            "A. To speed up internet connection",
+            "B. To filter incoming and outgoing network traffic",
+            "C. To store data",
+            "D. To create new software"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is NOT a benefit of using a VPN?",
+          "options": [
+            "A. Encrypting your data",
+            "B. Hiding your IP address",
+            "C. Increasing your internet speed",
+            "D. Protecting your online privacy"
+          ],
+          "answer": "C"
+        },
+        {
+          "question": "What does IDS stand for in network security?",
+          "options": [
+            "A. Internet Data System",
+            "B. Intrusion Detection System",
+            "C. Internal Data Security",
+            "D. Information Defense System"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to use strong, unique passwords for each account?",
+          "options": [
+            "A. To make it easier to remember passwords",
+            "B. To prevent unauthorized access to multiple accounts if one password is compromised",
+            "C. To share passwords with friends",
+            "D. To increase social media usage"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the role of an Intrusion Detection System (IDS)?",
+          "options": [
+            "A. To block all incoming traffic",
+            "B. To detect and alert on suspicious activity",
+            "C. To create new software",
+            "D. To increase internet speed"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is a common feature of a firewall?",
+          "options": [
+            "A. Data storage",
+            "B. Traffic filtering",
+            "C. Social media integration",
+            "D. Software development"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the purpose of encrypting data?",
+          "options": [
+            "A. To make data accessible to everyone",
+            "B. To protect data from unauthorized access",
+            "C. To increase data size",
+            "D. To speed up data transmission"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you ensure the security of your home network?",
+          "options": [
+            "A. By using a firewall",
+            "B. By sharing your Wi-Fi password",
+            "C. By disabling encryption",
+            "D. By using public Wi-Fi"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a VPN used for?",
+          "options": [
+            "A. To create viruses",
+            "B. To encrypt your internet connection and protect your privacy",
+            "C. To increase social media usage",
+            "D. To store data"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to regularly update your software?",
+          "options": [
+            "A. To add new features",
+            "B. To fix security vulnerabilities",
+            "C. To increase data size",
+            "D. To make data accessible to everyone"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the main goal of network security?",
+          "options": [
+            "A. To speed up internet connection",
+            "B. To protect data and systems from unauthorized access",
+            "C. To create new software",
+            "D. To increase social media usage"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is a benefit of using a firewall?",
+          "options": [
+            "A. Blocking unauthorized access",
+            "B. Increasing internet speed",
+            "C. Storing data",
+            "D. Creating new software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the purpose of a Virtual Private Network (VPN)?",
+          "options": [
+            "A. To create viruses",
+            "B. To encrypt your internet connection and protect your privacy",
+            "C. To increase social media usage",
+            "D. To store data"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you protect your network from cyber threats?",
+          "options": [
+            "A. By using a firewall",
+            "B. By sharing your passwords",
+            "C. By disabling encryption",
+            "D. By using public Wi-Fi"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the role of a firewall in network security?",
+          "options": [
+            "A. To speed up internet connection",
+            "B. To filter incoming and outgoing network traffic",
+            "C. To store data",
+            "D. To create new software"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to use a VPN while working remotely?",
+          "options": [
+            "A. To increase internet speed",
+            "B. To protect company data and ensure privacy",
+            "C. To create new software",
+            "D. To increase social media usage"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is a common method used by cybercriminals to gain access to sensitive information?",
+          "options": [
+            "A. Sending legitimate emails",
+            "B. Social engineering",
+            "C. Using strong passwords",
+            "D. Encrypting data"
+          ],
+          "answer": "B"
+        }
+      ]
+    },
+    "lesson3": {
+      "id": 3,
+      "title": "Lesson 3 Quiz: Malware and Anti-Virus Software",
+      "questions": [
+        {
+          "question": "What is malware?",
+          "options": [
+            "A. A type of software designed to protect devices",
+            "B. Any software designed to harm or exploit devices",
+            "C. A tool for enhancing device performance",
+            "D. A method of data encryption"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Which of the following is a type of malware?",
+          "options": [
+            "A. Firewall",
+            "B. Antivirus",
+            "C. Worm",
+            "D. VPN"
+          ],
+          "answer": "C"
+        },
+        {
+          "question": "How does ransomware affect a device?",
+          "options": [
+            "A. It speeds up the device",
+            "B. It locks files and demands payment to unlock them",
+            "C. It enhances graphics performance",
+            "D. It improves internet speed"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is a common way malware spreads?",
+          "options": [
+            "A. Through legitimate software updates",
+            "B. Via email attachments",
+            "C. By using strong passwords",
+            "D. Through secure websites"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to keep antivirus software updated?",
+          "options": [
+            "A. To increase device speed",
+            "B. To ensure it can detect the latest threats",
+            "C. To improve battery life",
+            "D. To enhance video quality"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the role of antivirus software?",
+          "options": [
+            "A. To create new viruses",
+            "B. To scan and remove threats from a system",
+            "C. To manage social media accounts",
+            "D. To design user interfaces"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you avoid downloading malware?",
+          "options": [
+            "A. By clicking on all pop-up ads",
+            "B. By downloading software from trusted sources",
+            "C. By disabling antivirus software",
+            "D. By using public Wi-Fi"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is a virus in the context of cybersecurity?",
+          "options": [
+            "A. A self-replicating program that spreads by attaching to files",
+            "B. A tool for cleaning up disk space",
+            "C. A method of data encryption",
+            "D. A type of firewall"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What should you do if you suspect a malware infection?",
+          "options": [
+            "A. Ignore it",
+            "B. Run a full system scan with your antivirus software",
+            "C. Share your passwords",
+            "D. Disable your firewall"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it risky to use pirated software?",
+          "options": [
+            "A. It often contains malware",
+            "B. It improves device performance",
+            "C. It is always free of charge",
+            "D. It enhances graphics quality"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a worm in cybersecurity?",
+          "options": [
+            "A. A type of antivirus software",
+            "B. A self-replicating program that spreads across networks",
+            "C. A tool for data backup",
+            "D. A method of password protection"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you protect your device from malware?",
+          "options": [
+            "A. By using strong passwords",
+            "B. By installing and updating antivirus software",
+            "C. By disabling all security features",
+            "D. By sharing your passwords"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the purpose of a firewall?",
+          "options": [
+            "A. To filter incoming and outgoing network traffic",
+            "B. To increase internet speed",
+            "C. To store data",
+            "D. To create new software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a Trojan horse in cybersecurity?",
+          "options": [
+            "A. A type of antivirus software",
+            "B. A malicious program disguised as legitimate software",
+            "C. A tool for enhancing device performance",
+            "D. A method of data encryption"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is it important to avoid clicking on suspicious links?",
+          "options": [
+            "A. They can lead to malware infections",
+            "B. They improve internet speed",
+            "C. They enhance video quality",
+            "D. They increase battery life"
+          ],
+          "answer": "A"
+        }
+      ]
+    },
+    "lesson4": {
+      "id": 4,
+      "title": "Lesson 4 Quiz: Social Engineering and Phishing",
+      "questions": [
+        {
+          "question": "What is social engineering?",
+          "options": [
+            "A. A method of tricking people into giving away sensitive information",
+            "B. A type of software development",
+            "C. A way to increase social media followers",
+            "D. A method of designing user interfaces"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is phishing?",
+          "options": [
+            "A. Sending fake emails or messages to trick people into giving away passwords or money",
+            "B. A type of fishing in the ocean",
+            "C. A method of creating new software",
+            "D. A way to manage social media accounts"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is pretexting?",
+          "options": [
+            "A. Scammers pretending to be someone you trust to get information",
+            "B. A method of writing text messages",
+            "C. A way to design user interfaces",
+            "D. A type of video editing"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is baiting?",
+          "options": [
+            "A. Leaving infected USB drives in public hoping someone plugs them in",
+            "B. A method of catching fish",
+            "C. A way to increase social media followers",
+            "D. A type of graphic design"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can you verify the sender of an email?",
+          "options": [
+            "A. By checking the email address and looking for signs of phishing",
+            "B. By clicking on all links in the email",
+            "C. By sharing the email with friends",
+            "D. By ignoring the email"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why should you avoid sharing sensitive information over calls or messages?",
+          "options": [
+            "A. To prevent it from being intercepted by scammers",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What should you do if you receive an unsolicited offer or prize?",
+          "options": [
+            "A. Be cautious and verify its legitimacy",
+            "B. Accept it immediately",
+            "C. Share it on social media",
+            "D. Ignore it"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a common sign of a phishing email?",
+          "options": [
+            "A. Poor grammar and spelling mistakes",
+            "B. Professional language",
+            "C. A familiar sender",
+            "D. A well-designed layout"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is it important to stay alert to social engineering scams?",
+          "options": [
+            "A. To protect yourself and others from being tricked",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What should you do if you find an unknown USB drive?",
+          "options": [
+            "A. Avoid plugging it in and report it",
+            "B. Plug it in to see what it contains",
+            "C. Share it with friends",
+            "D. Use it for personal storage"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can you protect yourself from social engineering attacks?",
+          "options": [
+            "A. By being cautious and verifying information",
+            "B. By sharing passwords with friends",
+            "C. By using public Wi-Fi",
+            "D. By ignoring all emails"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the best defense against social engineering tricks?",
+          "options": [
+            "A. Understanding and recognizing them",
+            "B. Increasing social media followers",
+            "C. Developing new software",
+            "D. Improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is it important to report phishing emails?",
+          "options": [
+            "A. To help prevent others from falling victim",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What should you do if you receive a suspicious phone call asking for sensitive information?",
+          "options": [
+            "A. Hang up and verify the caller's identity through official channels",
+            "B. Provide the information requested",
+            "C. Share the call details on social media",
+            "D. Ignore the call"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can you stay informed about the latest social engineering scams?",
+          "options": [
+            "A. By following cybersecurity news and updates",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        }
+      ]
+    },
+    "lesson5": {
+      "id": 5,
+      "title": "Lesson 5 Quiz: Cybersecurity Threats and Risk Management",
+      "questions": [
+        {
+          "question": "What is a DDoS attack?",
+          "options": [
+            "A. A method to speed up internet connection",
+            "B. An attack that overwhelms a service with excessive traffic",
+            "C. A way to store data securely",
+            "D. A technique to improve software performance"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can amplification attacks be mitigated?",
+          "options": [
+            "A. By using traffic filtering and load balancing",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a Man-in-the-Middle (MitM) attack?",
+          "options": [
+            "A. An attack where communication is intercepted and altered",
+            "B. A method to increase social media followers",
+            "C. A type of software development",
+            "D. A way to improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is encryption important in preventing MitM attacks?",
+          "options": [
+            "A. It speeds up data transmission",
+            "B. It ensures data is only accessible to authorized parties",
+            "C. It increases social media followers",
+            "D. It improves public speaking skills"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the first step in risk management?",
+          "options": [
+            "A. Identifying potential threats and vulnerabilities",
+            "B. Increasing social media followers",
+            "C. Developing new software",
+            "D. Improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can organizations assess the impact of risks?",
+          "options": [
+            "A. By evaluating the likelihood and severity of each risk",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is a key strategy in mitigating cybersecurity risks?",
+          "options": [
+            "A. Regular software updates and employee training",
+            "B. Increasing social media followers",
+            "C. Developing new software",
+            "D. Improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is a comprehensive backup strategy important?",
+          "options": [
+            "A. To ensure data integrity and availability during cyberattacks",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What role do botnets play in DDoS attacks?",
+          "options": [
+            "A. They are networks of compromised computers used to launch attacks",
+            "B. They increase social media followers",
+            "C. They develop new software",
+            "D. They improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can organizations defend against DDoS attacks?",
+          "options": [
+            "A. By collaborating with internet service providers",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the purpose of conducting regular security audits?",
+          "options": [
+            "A. To identify and address security weaknesses",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the role of a Red Team in cybersecurity?",
+          "options": [
+            "A. To simulate cyber attacks and test security measures",
+            "B. To manage social media accounts",
+            "C. To create marketing strategies",
+            "D. To design user interfaces"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is it important to educate employees about cybersecurity threats?",
+          "options": [
+            "A. To foster a culture of cybersecurity awareness",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the benefit of simulated phishing exercises?",
+          "options": [
+            "A. They help reinforce knowledge and keep security top of mind",
+            "B. They increase social media followers",
+            "C. They develop new software",
+            "D. They improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can organizations ensure the continued safety of digital assets?",
+          "options": [
+            "A. By taking a proactive approach to cybersecurity",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        }
+      ]
+    },
+    "lesson6": {
+      "id": 6,
+      "title": "Lesson 6 Quiz: Cybersecurity Best Practices and Career Paths",
+      "questions": [
+        {
+          "question": "Why is it important to use strong, unique passwords for each account?",
+          "options": [
+            "A. To make it easier to remember passwords",
+            "B. To prevent unauthorized access to multiple accounts if one password is compromised",
+            "C. To share passwords with friends",
+            "D. To increase social media usage"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the purpose of encrypting sensitive files before sharing them?",
+          "options": [
+            "A. To make data accessible to everyone",
+            "B. To protect data from unauthorized access during transmission",
+            "C. To increase data size",
+            "D. To speed up data transmission"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "How can you practice secure browsing habits?",
+          "options": [
+            "A. By visiting any website without checking its security",
+            "B. By ensuring that the websites you visit are secure (look for HTTPS in the URL) and avoiding suspicious links",
+            "C. By clicking on all links in emails",
+            "D. By sharing your browsing history with friends"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the role of an Incident Responder?",
+          "options": [
+            "A. To create new software",
+            "B. To act fast during attacks to mitigate damage and restore normal operations",
+            "C. To manage social media accounts",
+            "D. To design websites"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What does a Penetration Tester do?",
+          "options": [
+            "A. Writes malware",
+            "B. Tests systems for weaknesses by simulating attacks to identify vulnerabilities",
+            "C. Manages social media accounts",
+            "D. Designs user interfaces"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "What is the role of a Forensic Analyst in cybersecurity?",
+          "options": [
+            "A. Develops new encryption algorithms",
+            "B. Investigates cybercrimes by analyzing data and digital evidence",
+            "C. Manages network traffic",
+            "D. Creates marketing strategies"
+          ],
+          "answer": "B"
+        },
+        {
+          "question": "Why is continuous learning important in a cybersecurity career?",
+          "options": [
+            "A. To keep up with the latest threats and security technologies",
+            "B. To increase social media followers",
+            "C. To develop new video games",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the primary focus of a Security Architect?",
+          "options": [
+            "A. To design and implement secure network solutions",
+            "B. To manage social media accounts",
+            "C. To create marketing strategies",
+            "D. To develop new software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Which of the following is a common tool used by cybersecurity professionals?",
+          "options": [
+            "A. Network scanners",
+            "B. Graphic design software",
+            "C. Social media management tools",
+            "D. Video editing software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is it important for cybersecurity professionals to stay updated on the latest security trends?",
+          "options": [
+            "A. To effectively protect against new and emerging threats",
+            "B. To increase social media followers",
+            "C. To develop new video games",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the primary focus of a Vulnerability Analyst?",
+          "options": [
+            "A. To identify and assess security vulnerabilities in systems",
+            "B. To manage social media accounts",
+            "C. To create marketing strategies",
+            "D. To develop new software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Which of the following is a benefit of pursuing a career in cybersecurity?",
+          "options": [
+            "A. High demand for skilled professionals",
+            "B. Increased social media followers",
+            "C. Opportunities to create marketing strategies",
+            "D. Ability to design user interfaces"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the role of a Chief Information Security Officer (CISO)?",
+          "options": [
+            "A. To oversee and manage an organization's cybersecurity strategy",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can organizations protect against insider threats?",
+          "options": [
+            "A. By implementing strict access controls and monitoring employee activities",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the importance of a cybersecurity policy in an organization?",
+          "options": [
+            "A. It provides guidelines and procedures for maintaining security",
+            "B. It increases social media followers",
+            "C. It develops new software",
+            "D. It improves public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can regular security audits benefit an organization?",
+          "options": [
+            "A. By identifying vulnerabilities and ensuring compliance with security standards",
+            "B. By increasing social media followers",
+            "C. By developing new software",
+            "D. By improving public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the role of a Security Operations Center (SOC)?",
+          "options": [
+            "A. To monitor and respond to security incidents in real-time",
+            "B. To manage social media accounts",
+            "C. To create marketing strategies",
+            "D. To develop new software"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "Why is it important to have a disaster recovery plan?",
+          "options": [
+            "A. To ensure business continuity in the event of a cyber attack or natural disaster",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "What is the benefit of using multi-factor authentication?",
+          "options": [
+            "A. It adds an extra layer of security by requiring multiple forms of verification",
+            "B. It increases social media followers",
+            "C. It develops new software",
+            "D. It improves public speaking skills"
+          ],
+          "answer": "A"
+        },
+        {
+          "question": "How can threat intelligence be used in cybersecurity?",
+          "options": [
+            "A. To proactively identify and mitigate potential threats",
+            "B. To increase social media followers",
+            "C. To develop new software",
+            "D. To improve public speaking skills"
+          ],
+          "answer": "A"
+        }
+      ]
+    }
+}

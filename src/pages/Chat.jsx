@@ -1,16 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Shield, Sun, Moon, Link2, Sparkles, Loader, Trash2, ArrowLeft } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Shield, Sun, Moon, Trash2, Bot, User, Loader, ArrowLeft, Send, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github-dark.css';
-import { motion, AnimatePresence } from 'framer-motion';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import remarkGfm from 'remark-gfm';
+import { useTheme } from '../context/ThemeContext';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -132,8 +129,10 @@ const Chat = () => {
                 text: `You are CyberGuard AI, a friendly and knowledgeable cybersecurity assistant dedicated to teaching university students about cybersecurity. Your mission is to explain concepts clearly and engagingly, using markdown formatting to structure responses for easy readability.
 
                 Guidelines:
+                - Keep responses concise for simple greetings (e.g. "Hi! I'm CyberGuard AI, your friendly cybersecurity assistant. How can I help you today?")
                 - Format all responses in markdown with proper headings (#, ##, ###)
-                - Use proper spacing between sections (add empty lines)
+                - Use proper spacing between sections (add empty lines well and add a space between the sections)
+                - Make all response look organized and clean
                 - Create clear lists with bullet points (-) or numbers (1.)
                 - Use emphasis (* or _) for important points
                 - Make links stand out by adding a 🔗 icon before them
@@ -145,7 +144,7 @@ const Chat = () => {
                 - Use up to 2 relevant emojis per section
                 - Avoid using ** or __ for bold text
                 - For links, use this exact format to make them stand out:
-                  🔗 <a href="URL" class="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline decoration-2 hover:decoration-4 transition-all duration-200">Title <Link2 className="w-4 h-4" /></a>
+                  🔗 <a href="URL" class="inline-flex items-center gap-1 text-blue-500 hover:text-[#454545] dark:text-blue-400 dark:hover:text-blue-300 underline decoration-2 hover:decoration-4 transition-all duration-200">Title <Link2 className="w-4 h-4" /></a>
                 
                 Example Response Format:
                 # Understanding SQL Injection 🛡️
@@ -206,14 +205,20 @@ const Chat = () => {
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsTyping(false);
 
-      // Get response text and preview markdown
+      // Get response text and format it
       let responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "# Connection Issue \n\nI'm having a brief connection issue. Let's try again! 🔄";
       
-      // Format the text with proper spacing and preview
+      // Format the text with proper spacing and styling
       responseText = responseText
-        .replace(/\n#/g, '\n\n#')
-        .replace(/\n-/g, '\n\n-')
-        .replace(/\n\d\./g, '\n\n1.');
+        .replace(/\n#/g, '\n\n#') // Add space before headings
+        .replace(/\n-/g, '\n\n-') // Add space before bullet points
+        .replace(/\n\d\./g, '\n\n1.') // Add space before numbered lists
+        .replace(/\*\*(.*?)\*\*/g, '*$1*') // Convert bold to italic
+        .replace(/__(.*?)__/g, '*$1*') // Convert bold underscore to italic
+        .replace(/\n\n\n+/g, '\n\n') // Remove excessive line breaks
+        .replace(/🔗\s*<a/g, '\n\n🔗 <a') // Add space before links
+        .replace(/<\/a>\s*🔗/g, '</a>') // Clean up link formatting
+        .trim(); // Remove extra whitespace
       
       setMarkdownPreview(responseText);
 

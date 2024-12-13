@@ -42,184 +42,118 @@ const Lesson2 = () => {
 
   return (
     <LessonContent 
-      title="Remote Work Security" 
-      description="Learn how to set up a secure home office, use VPNs properly, and protect company data while working remotely."
+      title="Module 2: Network Security and Firewalls" 
+      description="The internet is like a bustling highway, with data zipping back and forth. But just like a toll booth keeps out uninvited guests, firewalls act as the gatekeepers of your network."
     >
-      {/* Introduction */}
+      {/* Chapter 1 */}
       <section className={`rounded-xl p-6 mb-8 shadow-lg ${
         darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
       }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-          Introduction
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+          Chapter 1: What is Network Security?
         </h2>
         <div className={`rounded-lg p-6 ${
           darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
         }`}>
           <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Remote work has become increasingly common, bringing new cybersecurity challenges. When working from home, employees must take extra precautions to protect sensitive company data and maintain a secure connection to corporate networks.
-          </p>
-          <p className={`text-lg leading-relaxed mt-4 border-l-4 border-purple-300 pl-4 py-2 rounded ${
-            darkMode ? 'bg-[#2d1f36]/40 text-gray-300' : 'bg-white text-gray-600'
-          }`}>
-            Consider this: You're working from home on an important project using your personal WiFi network. Without proper security measures like a VPN and encrypted connection, your sensitive work data could be vulnerable to cyber threats. This highlights why remote work security is crucial in today's digital workplace.
-          </p>
-        </div>
-      </section>
-
-      {/* What is Remote Work Security? */}
-      <section className={`rounded-xl p-6 mb-8 shadow-lg ${
-        darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
-      }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-500">
-          What is Remote Work Security?
-        </h2>
-        <div className={`rounded-lg p-6 ${
-          darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
-        }`}>
-          <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Remote work security encompasses all measures taken to protect company data and resources when employees work outside the traditional office environment. According to recent studies, over 20% of cyber incidents are related to remote work vulnerabilities.
+            Imagine your home: you lock the doors, close the windows, and maybe even install a security camera. Network security does the same for your digital space.
           </p>
           <p className={`text-lg leading-relaxed mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Key components of remote work security include:
+            It ensures that:
           </p>
-          <ul className={`grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all text-black dark:text-gray-200`}>
-              <strong className={`text-emerald-500 dark:text-emerald-300`}>Secure Network Setup:</strong> Implementing strong WiFi encryption, firewall protection, and regular network security updates.
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all text-black dark:text-gray-200`}>
-              <strong className={`text-emerald-500 dark:text-emerald-300`}>VPN Usage:</strong> Using Virtual Private Networks to create secure, encrypted connections to company resources.
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all text-black dark:text-gray-200`}>
-              <strong className={`text-emerald-500 dark:text-emerald-300`}>Device Security:</strong> Securing all devices used for work with proper antivirus software and security updates.
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all text-black dark:text-gray-200`}>
-              <strong className={`text-emerald-500 dark:text-emerald-300`}>Data Protection:</strong> Implementing encryption and secure file sharing practices for sensitive company information.
-            </li>
+          <ul className={`list-disc pl-5 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <li>Only the right people can enter.</li>
+            <li>Intruders are stopped in their tracks.</li>
+            <li>Sensitive data is protected from prying eyes.</li>
           </ul>
         </div>
       </section>
 
-      {/* Real-World Examples */}
+      {/* Chapter 2 */}
       <section className={`rounded-xl p-6 mb-8 shadow-lg ${
         darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
       }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
-          Real-World Examples
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-500">
+          Chapter 2: Firewalls – The First Line of Defense
         </h2>
         <div className={`rounded-lg p-6 ${
           darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
         }`}>
           <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Let's examine some notable remote work security incidents:
+            Think of a firewall as a digital bouncer at a club, letting in the right crowd and keeping troublemakers out.
           </p>
-          <div className={`grid grid-cols-1 gap-4 mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all border-l-4 border-rose-300 text-black dark:text-gray-200`}>
-              <strong className={`text-rose-500 dark:text-red-400`}>Zoom Security Issues (2020):</strong> The rapid shift to remote work exposed security vulnerabilities in video conferencing platforms, leading to "Zoombombing" and data privacy concerns.
-            </div>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all border-l-4 border-orange-300 text-black dark:text-gray-200`}>
-              <strong className={`text-orange-500 dark:text-orange-400`}>Remote Desktop Protocol Attacks (2021):</strong> Cybercriminals exploited unsecured RDP connections, leading to numerous data breaches in remote work environments.
-            </div>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all border-l-4 border-yellow-300 text-black dark:text-gray-200`}>
-              <strong className={`text-yellow-500 dark:text-yellow-400`}>Cloud Storage Breaches (2022):</strong> Improper configuration of cloud storage services led to multiple data leaks from remote workers sharing sensitive files.
-            </div>
-          </div>
+          <p className={`text-lg leading-relaxed mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Firewalls work by:
+          </p>
+          <ul className={`list-disc pl-5 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <li>Filtering incoming and outgoing traffic.</li>
+            <li>Blocking access to harmful websites.</li>
+            <li>Creating a barrier between your device and external threats.</li>
+          </ul>
+          <p className={`text-lg leading-relaxed mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Example: You’re on your laptop at a coffee shop. A firewall ensures that no one on the same Wi-Fi can peek into your data or sneak malware onto your device.
+          </p>
         </div>
       </section>
 
-      {/* How to Secure Remote Work */}
+      {/* Chapter 3 */}
       <section className={`rounded-xl p-6 mb-8 shadow-lg ${
         darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
       }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-blue-500">
-          How to Secure Your Remote Workspace
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
+          Chapter 3: Tools for Extra Protection
         </h2>
         <div className={`rounded-lg p-6 ${
           darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
         }`}>
           <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Essential security measures for remote work:
+            To further enhance your network security, consider using these tools:
           </p>
-          <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 text-black dark:text-gray-200`}>
-              <strong className={`text-indigo-500 dark:text-indigo-400`}>VPN Connection:</strong> Always use a company-approved VPN when accessing work resources to ensure encrypted, secure connections.
-            </div>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 text-black dark:text-gray-200`}>
-              <strong className={`text-indigo-500 dark:text-indigo-400`}>Secure WiFi:</strong> Use WPA3 encryption for your home network and change default router passwords.
-            </div>
-            <div className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 text-black dark:text-gray-200`}>
-              <strong className={`text-indigo-500 dark:text-indigo-400`}>Regular Updates:</strong> Keep all work devices, software, and security tools up to date with the latest patches.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Practical Tips */}
-      <section className={`rounded-xl p-6 mb-8 shadow-lg ${
-        darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
-      }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-500">
-          Best Practices for Remote Work
-        </h2>
-        <div className={`rounded-lg p-6 ${
-          darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
-        }`}>
-          <ul className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center space-x-2 text-black dark:text-gray-200`}>
-              <span className={`w-2 h-2 bg-green-400 dark:bg-green-400 rounded-full`}></span>
-              <span>Use strong, unique passwords for all work accounts and enable 2FA.</span>
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center space-x-2 text-black dark:text-gray-200`}>
-              <span className={`w-2 h-2 bg-green-400 dark:bg-green-400 rounded-full`}></span>
-              <span>Separate personal and work activities on different devices when possible.</span>
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center space-x-2 text-black dark:text-gray-200`}>
-              <span className={`w-2 h-2 bg-green-400 dark:bg-green-400 rounded-full`}></span>
-              <span>Use company-approved tools for file sharing and collaboration.</span>
-            </li>
-            <li className={`bg-white dark:bg-[#1a2436]/50 p-4 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center space-x-2 text-black dark:text-gray-200`}>
-              <span className={`w-2 h-2 bg-green-400 dark:bg-green-400 rounded-full`}></span>
-              <span>Create a dedicated, secure workspace away from household distractions.</span>
-            </li>
+          <ul className={`list-disc pl-5 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <li><strong>Intrusion Detection Systems (IDS):</strong> Like a motion detector, it spots unusual activity and alerts you.</li>
+            <li><strong>Virtual Private Networks (VPNs):</strong> A VPN is your invisibility cloak, encrypting your data so no one can spy on your online activities.</li>
           </ul>
         </div>
       </section>
 
-      {/* Interactive Quiz */}
+      {/* Chapter 4 */}
       <section className={`rounded-xl p-6 mb-8 shadow-lg ${
         darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
       }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-purple-500">
-          Interactive Activity
-        </h2>
-        <div className={`rounded-lg p-6 ${
-          darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
-        }`}>
-          <p className={`text-lg leading-relaxed mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-            Identify which remote work setup is more secure:
-          </p>
-          <div className={`space-y-4 ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-            <div className={`bg-white dark:bg-red-900/20 p-4 rounded-lg border-l-4 border-red-400 text-gray-800 dark:text-gray-200`}>
-              <strong className={`text-red-600 dark:text-red-400`}>Setup 1:</strong> Using public WiFi without VPN, personal email for work files, default router settings
-            </div>
-            <div className={`bg-white dark:bg-green-900/20 p-4 rounded-lg border-l-4 border-green-400 text-gray-800 dark:text-gray-200`}>
-              <strong className={`text-green-600 dark:text-green-400`}>Setup 2:</strong> Secured home network, VPN enabled, company-approved tools, regular security updates
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Wrap-up */}
-      <section className={`rounded-xl p-6 mb-8 shadow-lg ${
-        darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
-      }`}>
-        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-rose-500">
-          Conclusion
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-blue-500">
+          Chapter 4: Everyday Network Guardians
         </h2>
         <div className={`rounded-lg p-6 ${
           darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
         }`}>
           <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Remote work security is essential in today's digital workplace. By following proper security protocols and best practices, you can create a safe and productive remote work environment while protecting both personal and company data.
+            Real-world examples of network security in action:
+          </p>
+          <ul className={`list-disc pl-5 mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <li><strong>Lee:</strong> Configured a firewall for their home network, blocking suspicious traffic and protecting their family’s devices.</li>
+            <li><strong>Sam:</strong> Uses a VPN while working remotely, keeping company data secure.</li>
+          </ul>
+          <p className={`text-lg leading-relaxed mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            You can take similar steps to safeguard your online world!
+          </p>
+        </div>
+      </section>
+
+      {/* Final Chapter */}
+      <section className={`rounded-xl p-6 mb-8 shadow-lg ${
+        darkMode ? 'bg-[#1e293b] border border-gray-700' : 'bg-white border border-gray-200'
+      }`}>
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-rose-500">
+          Final Chapter: Become a Network Guardian
+        </h2>
+        <div className={`rounded-lg p-6 ${
+          darkMode ? 'bg-[#1a1f36]/60 backdrop-blur-sm' : 'bg-gray-50'
+        }`}>
+          <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            By understanding firewalls and other tools, you’re taking the first step toward defending your network.
+          </p>
+          <p className={`text-lg leading-relaxed mt-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Stay informed. Stay secure. The digital world needs you!
           </p>
         </div>
       </section>

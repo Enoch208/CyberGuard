@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles } from 'lucide-react';
+import { Shield, MessageCircle, Download, HelpCircle, Sun, Moon, Lock, Key, Globe, Database, AlertTriangle, FileText, ChevronRight, Sparkles, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
@@ -80,43 +81,43 @@ const Module = () => {
 
   const modules = [
     {
-      title: 'Phishing Awareness',
-      description: 'Real-world phishing examples, CEO fraud cases, and how to verify suspicious emails.',
+      title: 'Cybersecurity Fundamentals',
+      description: 'This module introduces students to the basics of cybersecurity, including security principles, types of cyber threats, and the importance of cybersecurity in everyday life.',
       progress: progress.progress1 * 100,
       lesson: 1,
       icon: <AlertTriangle className="w-6 h-6 text-orange-400" />
     },
     {
-      title: 'Remote Work Security', 
-      description: 'Secure home office setup, VPN usage, and protecting company data while working remotely.',
+      title: 'Network Security and Firewalls', 
+      description: 'This module covers the basics of network security, including firewalls, intrusion detection systems, and virtual private networks (VPNs). Students will learn how to configure and manage firewalls to protect against unauthorized access.',
       progress: progress.progress2 * 100,
       lesson: 2,
       icon: <Globe className="w-6 h-6 text-blue-400" />
     },
     {
-      title: 'Social Media Safety',
-      description: 'Protecting personal information, identifying fake profiles, and avoiding social media scams.',
+      title: 'Malware and Anti-Virus Software',
+      description: 'This module focuses on malware, including viruses, worms, and ransomware. Students will learn about the different types of malware, how they spread, and how to protect against them using anti-virus software.',
       progress: progress.progress3 * 100,
       lesson: 3,
       icon: <MessageCircle className="w-6 h-6 text-purple-400" />
     },
     {
-      title: 'Mobile Device Security',
-      description: 'Securing smartphones, recognizing malicious apps, and safe public WiFi practices.',
+      title: 'Social Engineering and Phishing',
+      description: 'This module explores social engineering tactics, including phishing, pretexting, and baiting. Students will learn how to identify and avoid these types of attacks, and how to protect themselves and their organizations.',
       progress: progress.progress4 * 100,
       lesson: 4,
       icon: <Lock className="w-6 h-6 text-red-400" />
     },
     {
-      title: 'Personal Data Protection',
-      description: 'Handling sensitive information, secure online banking, and identity theft prevention.',
+      title: 'Cybersecurity Threats and Risk Management',
+      description: 'This module covers various types of cybersecurity threats, including DDoS attacks, amplification attacks, and man-in-the-middle (MitM) attacks. Students will learn how to identify and mitigate these threats, and how to develop a risk management plan.',
       progress: progress.progress5 * 100,
       lesson: 5,
       icon: <Database className="w-6 h-6 text-green-400" />
     },
     {
-      title: 'Modern Scam Awareness',
-      description: 'Current cryptocurrency scams, romance fraud, and investment scheme recognition.',
+      title: 'Cybersecurity Best Practices and Career Paths',
+      description: 'This module provides an overview of cybersecurity best practices, including password management, data encryption, and secure online behavior. Students will also learn about different career paths in cybersecurity and how to get started in the field.',
       progress: progress.progress6 * 100,
       lesson: 6,
       icon: <Key className="w-6 h-6 text-yellow-400" />
@@ -259,11 +260,16 @@ const Module = () => {
                 {modules.map((module, index) => (
                   <div
                     key={index}
-                    className={`p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl
+                    className={`p-6 rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl relative
                       ${darkMode 
                         ? 'bg-slate-800/30 hover:bg-slate-700/40' 
                         : 'bg-white/70 hover:bg-white/90'}`}
                   >
+                    {module.progress === 100 && (
+                      <div className="absolute -top-3 -right-3 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full p-2 shadow-lg transform rotate-12 hover:rotate-0 transition-all duration-300">
+                        <CheckCircle className="w-5 h-5 text-white" />
+                      </div>
+                    )}
                     <div className="flex items-center space-x-3 mb-4">
                       {module.icon}
                       <h3 className={`text-xl font-semibold ${
@@ -296,7 +302,7 @@ const Module = () => {
                         flex items-center justify-center space-x-2
                         transform hover:-translate-y-1"
                     >
-                      <span>Start Training</span>
+                      <span>{module.progress === 100 ? 'Review Module' : 'Start Training'}</span>
                       <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>

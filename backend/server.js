@@ -5,21 +5,18 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
-// Enable CORS for all origins
 app.use(cors());
-
-// Parse JSON bodies 
 app.use(bodyParser.json());
 
-// Connect to MongoDB using environment variable
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
-// User model
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -33,7 +30,6 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
-// Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -53,12 +49,10 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-// Verify token endpoint
 app.get('/api/verify-token', verifyToken, (req, res) => {
     res.json({ success: true, message: 'Token is valid' });
 });
 
-// Login route
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -75,11 +69,10 @@ app.post('/api/login', async (req, res) => {
         res.json({ success: true, message: 'Login successful', token, username: user.username });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({ success: false, message: 'Unable to connect to server, please check your internet connection and try again.' });
     }
 });
 
-// Signup route
 app.post('/api/signup', async (req, res) => {
     const { username, password, email } = req.body;
     try {
@@ -96,11 +89,10 @@ app.post('/api/signup', async (req, res) => {
         res.json({ success: true, message: 'User registered successfully' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ success: false, message: 'Server error' });
+        res.status(500).json({ success: false, message: 'Unable to connect, check your internet connection and try again.' });
     }
 });
 
-// Get progress route - Protected by JWT verification
 app.get('/api/progress', verifyToken, async (req, res) => {
     try {
         const user = await User.findById(req.userId);
@@ -121,7 +113,6 @@ app.get('/api/progress', verifyToken, async (req, res) => {
     }
 });
 
-// Update progress route - Protected by JWT verification
 app.post('/api/progress', verifyToken, async (req, res) => {
     try {
         const updates = req.body;
@@ -130,10 +121,9 @@ app.post('/api/progress', verifyToken, async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
         
-        // Update only valid progress fields
         Object.keys(updates).forEach(key => {
             if (key.startsWith('progress') && typeof updates[key] === 'number') {
-                user[key] = Math.max(user[key], updates[key]); // Only update if new progress is higher
+                user[key] = Math.max(user[key], updates[key]);
             }
         });
         
@@ -142,6 +132,45 @@ app.post('/api/progress', verifyToken, async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+app.get('/api/quiz/:lessonId', async (req, res) => {
+    try {
+        const quizFilePath = path.join(__dirname, 'data', 'quiz.json');
+        const quizData = JSON.parse(fs.readFileSync(quizFilePath, 'utf8'));
+        const { lessonId } = req.params;
+        
+        const lessonKey = `lesson${lessonId}`;
+        if (!quizData[lessonKey]) {
+            return res.status(404).json({ 
+                success: false, 
+                message: `Quiz not found for lesson ${lessonId}` 
+            });
+        }
+
+  //just to format...
+        const formattedQuiz = {
+            success: true,
+            quiz: {
+                id: quizData[lessonKey].id,
+                title: quizData[lessonKey].title,
+                questions: quizData[lessonKey].questions.map(q => ({
+                    question: q.question,
+                    options: q.options,
+                    answer: q.answer
+                }))
+            }
+        };
+
+        res.json(formattedQuiz);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Server error while fetching quiz data',
+            details: err.message
+        });
     }
 });
 

@@ -1,28 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, Suspense } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Shield, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const LessonContent = ({ title, description, children }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { darkMode, setDarkMode } = useTheme();
   const [username, setUsername] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if user is logged in (validate token)
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login', { replace: true });
-    } else {
-      // Fetch username from local storage
-      const storedUsername = localStorage.getItem('username');
-      if (storedUsername) {
-        setUsername(storedUsername);
+    const validateAndLoadUser = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login', { replace: true });
+          return;
+        }
+
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+          setUsername(storedUsername);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false); // Set loading to false after fetching username
-    }
+    };
+
+    validateAndLoadUser();
   }, [navigate]);
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-[#0f172a] p-4">
+        <div className="text-red-500 text-xl font-semibold mb-4">
+          Error loading lesson content
+        </div>
+        <div className="text-gray-600 dark:text-gray-300">
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -92,35 +115,41 @@ const LessonContent = ({ title, description, children }) => {
       </header>
 
       {/* Lesson Content */}
-      <div className="container mx-auto px-6 py-8">
-        <div className={`p-8 rounded-xl transition-all duration-300 ${
-          darkMode ? 
-          'bg-[#1e293b] shadow-xl border border-gray-700' : 
-          'bg-white shadow-lg border border-gray-200'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-6 ${
-            darkMode ? 'text-gray-100' : 'text-gray-800'
-          }`}>{title}</h2>
-          <p className={`mb-6 text-lg ${
-            darkMode ? 'text-gray-300' : 'text-gray-600'
-          }`}>{description}</p>
-          <div className="space-y-6">{children}</div>
-          <div className="mt-8 flex justify-between">
-            <button
-              onClick={() => navigate('/chat')}
-              className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              Chat with AI
-            </button>
-            <button
-              onClick={() => navigate('/test')}
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-6 py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              Take Test
-            </button>
+      <Suspense fallback={
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      }>
+        <div className="container mx-auto px-6 py-8">
+          <div className={`p-8 rounded-xl transition-all duration-300 ${
+            darkMode ? 
+            'bg-[#1e293b] shadow-xl border border-gray-700' : 
+            'bg-white shadow-lg border border-gray-200'
+          }`}>
+            <h2 className={`text-3xl font-bold mb-6 ${
+              darkMode ? 'text-gray-100' : 'text-gray-800'
+            }`}>{title}</h2>
+            <p className={`mb-6 text-lg ${
+              darkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>{description}</p>
+            <div className="space-y-6">{children}</div>
+            <div className="mt-8 flex justify-between">
+              <button
+                onClick={() => navigate('/chat')}
+                className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 px-6 py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                Chat with AI
+              </button>
+              <button
+                onClick={() => navigate(`/quiz/${id}`)}
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 px-6 py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                Take Tests
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Suspense>
     </div>
   );
 };
