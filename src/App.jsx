@@ -7,7 +7,7 @@ import Module from './pages/Module';
 import LessonModule from './pages/LessonModule';
 import Chat from './pages/Chat';
 import { ThemeProvider } from './context/ThemeContext';
-import Quiz from './components/Quiz';  // Capital Q
+import Quiz from './components/Quiz';  
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
