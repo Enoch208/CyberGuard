@@ -36,7 +36,7 @@ const Module = () => {
     
     const verifyToken = async () => {
       try {
-        const verifyResponse = await fetch('http://localhost:5000/api/verify-token', {
+        const verifyResponse = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -47,7 +47,7 @@ const Module = () => {
         }
 
       
-        const response = await fetch('http://localhost:5000/api/progress', {
+        const response = await fetch('https://cyberguard-hc2y.onrender.com/api/progress', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

@@ -106,7 +106,7 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post("https://cyberguard-hc2y.onrender.com/api/login", {
         email: formData.email,
         password: formData.password
       });
@@ -151,7 +151,7 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/signup", {
+      const response = await axios.post("https://cyberguard-hc2y.onrender.com/api/signup", {
         username: formData.username,
         email: formData.email,
         password: formData.password

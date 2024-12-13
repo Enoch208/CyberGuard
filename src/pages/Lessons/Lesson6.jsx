@@ -13,7 +13,7 @@ const Lesson6 = () => {
         const token = localStorage.getItem('token');
         
         if (token) {
-          fetch('http://localhost:5000/api/progress', {
+          fetch('https://cyberguard-hc2y.onrender.com/api/progress', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

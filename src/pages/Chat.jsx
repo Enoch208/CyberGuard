@@ -61,7 +61,7 @@ const Chat = () => {
 
     const verifyToken = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/verify-token', {
+        const res = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!res.ok) throw new Error('Token invalid');

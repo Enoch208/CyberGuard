@@ -17,7 +17,7 @@ const Lesson4 = () => {
         
         if (token) {
           // Make API call to update progress
-          fetch('http://localhost:5000/api/progress', {
+          fetch('https://cyberguard-hc2y.onrender.com/api/progress', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

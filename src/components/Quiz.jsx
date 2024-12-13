@@ -29,7 +29,7 @@ const Quiz = () => {
     const fetchQuiz = async () => {
       try {
         // just to verify if the user is logged in
-        const verifyResponse = await fetch('http://localhost:5000/api/verify-token', {
+        const verifyResponse = await fetch('https://cyberguard-hc2y.onrender.com/api/verify-token', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -44,7 +44,7 @@ const Quiz = () => {
         setUsername(storedUsername);
 
         // Then fetch quiz data
-        const response = await fetch(`http://localhost:5000/api/quiz/${lessonId}`, {
+        const response = await fetch(`https://cyberguard-hc2y.onrender.com/api/quiz/${lessonId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -119,7 +119,7 @@ const Quiz = () => {
       const progress = score / quiz.questions.length;
       
       try {
-        await fetch('http://localhost:5000/api/progress', {
+        await fetch('https://cyberguard-hc2y.onrender.com/api/progress', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
