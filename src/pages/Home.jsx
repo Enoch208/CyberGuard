@@ -122,7 +122,7 @@ const Home = () => {
                 }
               </button>
               <Link 
-                to="/login" 
+                to="login" 
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 px-8 py-3 rounded-lg text-white font-semibold 
                   transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 hover:animate-pulse"
               >
@@ -149,14 +149,14 @@ const Home = () => {
                 Join our thriving community of cybersecurity enthusiasts. Master the art of digital defense through interactive learning, AI-powered guidance, and real-world scenarios.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a 
-                  href='/login' 
+                <Link 
+                  to="login" 
                   className="group bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 px-10 py-4 rounded-lg text-white font-semibold 
                     transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 hover:animate-pulse flex items-center justify-center"
                 >
                   Start Learning 
                   <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
                 <button 
                   className={`px-10 py-4 rounded-lg font-semibold border-2 ${
                     darkMode ? 'border-blue-500/30 hover:bg-blue-500/10' : 'border-blue-400/30 hover:bg-blue-400/10'
@@ -293,13 +293,13 @@ const Home = () => {
             <p className={`text-xl ${darkMode ? 'opacity-80' : 'opacity-70'} mb-10 max-w-3xl mx-auto leading-relaxed`}>
               Join thousands of students who have transformed their cybersecurity awareness with our cutting-edge platform.
             </p>
-            <a 
-              href="/login" 
+            <Link 
+              to="login" 
               className="inline-block bg-gradient-to-r from-emerald-500 to-blue-500 px-12 py-4 rounded-lg text-white text-xl 
                 font-semibold transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/30"
             >
               Get Started Now
-            </a>
+            </Link>
           </div>
         </div>
       </section>
