@@ -20,17 +20,18 @@ const Home = () => {
   };
 
   const testimonials = [
-    {
-      name: "Adekanmi Mojirade",
-      work: "Student, OAU.",
-      message: "CyberGuard has been a game changer for me. From staying updated to taking security quizzes, this platform has made me more security conscious.",
-      image: "https://i.ibb.co/FXjzZgg/moji.jpg"
-    },
+ 
     {
       name: "Enoch Idowu", 
       work: "Student, OAU.",
       message: "Cyberguard made me aware of many real world security concerns. It has been a great learning experience for me.",
       image: "https://media.licdn.com/dms/image/v2/D4D03AQFxb-K7NBjEpg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1711889764443?e=1737590400&v=beta&t=AXgreEqI959xPs_UsEymDs_j8IPpVWyrYW3erpPSk7E"
+    },
+    {
+      name: "Adekanmi Mojirade",
+      work: "Student, OAU.",
+      message: "CyberGuard has been a game changer for me. From staying updated to taking security quizzes, this platform has made me more security conscious.",
+      image: "https://i.ibb.co/FXjzZgg/moji.jpg"
     },
     {
       name: "Akinsunmade Temitope",
