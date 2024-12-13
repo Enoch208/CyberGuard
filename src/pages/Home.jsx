@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Shield, Book, Brain, Users, ChevronRight, Sun, Moon, ShieldCheck, Trophy, Lock, Eye } from 'lucide-react';
 import Footer from '../components/Footer';
 import { useTheme } from '../context/ThemeContext';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const { darkMode, setDarkMode } = useTheme();
@@ -120,13 +121,13 @@ const Home = () => {
                   <Moon className="w-6 h-6 text-blue-600" />
                 }
               </button>
-              <a 
-                href="/login" 
+              <Link 
+                to="/login" 
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 px-8 py-3 rounded-lg text-white font-semibold 
                   transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 hover:animate-pulse"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
