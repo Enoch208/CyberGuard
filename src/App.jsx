@@ -7,7 +7,7 @@ import Module from './pages/Module';
 import LessonModule from './pages/LessonModule';
 import Chat from './pages/Chat';
 import { ThemeProvider } from './context/ThemeContext';
-import Quiz from './components/Quiz';  
+import Quiz from './components/Quiz';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -25,7 +25,12 @@ const App = () => {
             <Route path="/login" element={<Login isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
             <Route path="/module" element={<Module />} />
             <Route path="/module/:id" element={<LessonModule />} />
-            <Route path="/quiz/:lessonId" element={<Quiz/>} />
+            <Route path="/quiz/:lessonId" element={
+              <Quiz 
+                isDarkMode={isDarkMode}
+                toggleDarkMode={toggleDarkMode}
+              />
+            } />
             <Route path="/chat" element={<Chat />} />
           </Routes>
         </div>

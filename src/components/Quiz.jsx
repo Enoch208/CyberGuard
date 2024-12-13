@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Shield, ChevronRight, AlertTriangle, CheckCircle, XCircle, X, Sun, Moon, Sparkles } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
-const Quiz = () => {AP
+const Quiz = () => {
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState(null);
