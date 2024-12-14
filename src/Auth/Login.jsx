@@ -17,6 +17,13 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const [passwordErrors, setPasswordErrors] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false
+  });
   const [success, setSuccess] = useState("");
   const [showSignup, setShowSignup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +61,17 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
     setError("");
     setSuccess("");
+
+    // Check password requirements in real time
+    if (name === 'password') {
+      setPasswordErrors({
+        length: value.length < 8 || value.length > 32,
+        uppercase: !/[A-Z]/.test(value),
+        lowercase: !/[a-z]/.test(value),
+        number: !/\d/.test(value),
+        special: !/[@$!%*?&]/.test(value)
+      });
+    }
   };
 
   // Login form validation
@@ -73,7 +91,7 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
     const { email, username, password, confirmPassword } = formData;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/;
 
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address");
@@ -85,8 +103,28 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
       return false;
     }
 
-    if (!passwordRegex.test(password)) {
-      setError("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character");
+    if (password.length < 8 || password.length > 32) {
+      setError("Password must be between 8 and 32 characters");
+      return false;
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter");
+      return false;
+    }
+
+    if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter");
+      return false;
+    }
+
+    if (!/\d/.test(password)) {
+      setError("Password must contain at least one number");
+      return false;
+    }
+
+    if (!/[@$!%*?&]/.test(password)) {
+      setError("Password must contain at least one special character (@$!%*?&)");
       return false;
     }
 
@@ -201,6 +239,13 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
     setError("");
     setSuccess("");
     setFormData({ email: "", password: "", username: "", confirmPassword: "" });
+    setPasswordErrors({
+      length: false,
+      uppercase: false,
+      lowercase: false,
+      number: false,
+      special: false
+    });
   };
 
   return (
@@ -493,6 +538,34 @@ const Login = React.memo(({ isDarkMode, toggleDarkMode }) => {
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
+
+                {/* Password Requirements Checklist */}
+                {showSignup && formData.password && (
+                  <div className={`text-sm space-y-1 p-3 rounded-lg ${
+                    isDarkMode ? "bg-slate-700/50" : "bg-gray-100/50"
+                  }`}>
+                    <p className={`font-medium ${isDarkMode ? "text-slate-300" : "text-gray-700"}`}>
+                      Password Requirements:
+                    </p>
+                    <ul className="space-y-1">
+                      <li className={`flex items-center ${passwordErrors.length ? "text-red-500" : "text-green-500"}`}>
+                        {passwordErrors.length ? "✗" : "✓"} 8-32 characters
+                      </li>
+                      <li className={`flex items-center ${passwordErrors.uppercase ? "text-red-500" : "text-green-500"}`}>
+                        {passwordErrors.uppercase ? "✗" : "✓"} One uppercase letter
+                      </li>
+                      <li className={`flex items-center ${passwordErrors.lowercase ? "text-red-500" : "text-green-500"}`}>
+                        {passwordErrors.lowercase ? "✗" : "✓"} One lowercase letter
+                      </li>
+                      <li className={`flex items-center ${passwordErrors.number ? "text-red-500" : "text-green-500"}`}>
+                        {passwordErrors.number ? "✗" : "✓"} One number
+                      </li>
+                      <li className={`flex items-center ${passwordErrors.special ? "text-red-500" : "text-green-500"}`}>
+                        {passwordErrors.special ? "✗" : "✓"} One special character (@$!%*?&)
+                      </li>
+                    </ul>
+                  </div>
+                )}
 
                 <div className="relative group">
                   <Lock className={`absolute left-3 top-1/2 -translate-y-1/2 transition-all duration-300
