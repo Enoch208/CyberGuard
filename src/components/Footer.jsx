@@ -134,11 +134,11 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex space-x-6 mt-8 justify-center sm:justify-start">
-              {[
-                { Icon: Twitter, href: "https://x.com/sweetner_pal?t=cpOxNq1rlljXm6-ItNMH7Q&s=09" },
-                { Icon: Instagram, href: "https://www.instagram.com/sweetner_pale/" },
-                { Icon: Linkedin, href: "https://www.linkedin.com/in/mojirade-adekanmi-971a05248" }
-              ].map(({ Icon, href }) => (
+                {[
+                  { Icon: Twitter, href: "https://x.com/enochidx" },
+                  { Icon: Instagram, href: "https://www.instagram.com/enochid200/" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/enochid200" }
+                ].map(({ Icon, href }) => (
                 <a 
                   key={href} 
                   href={href} 
@@ -170,9 +170,9 @@ const Footer = () => {
         >
           <div className="flex flex-wrap justify-center gap-6 mb-6">
             {[
-              { Icon: Mail, text: "mojiradeoluranti@gmail.com" },
-              { Icon: Phone, text: "+234 901 680 0091" },
-              { Icon: MapPin, text: "Lagos, Nigeria" }
+              { Icon: Mail, text: "enochid200@gmail.com" },
+              { Icon: Phone, text: "+234 701 325 8955" },
+              { Icon: MapPin, text: "Abuja, Nigeria" }
             ].map(({ Icon, text }) => (
               <div 
                 key={text} 

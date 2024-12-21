@@ -17,7 +17,7 @@ const Quiz = () => {
   const [username, setUsername] = useState('');
   const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { darkMode, setDarkMode } = useTheme();
+  const { darkMode, setDarkMode } = useTheme(); 
 
   useEffect(() => {
     const token = localStorage.getItem('token');
