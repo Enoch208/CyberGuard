@@ -136,7 +136,7 @@ const Footer = () => {
             <div className="flex space-x-6 mt-8 justify-center sm:justify-start">
                 {[
                   { Icon: Twitter, href: "https://x.com/enochidx" },
-                  { Icon: Instagram, href: "https://www.instagram.com/enochid200/" },
+                  { Icon: Instagram, href: "https://www.instagram.com/enochid/" },
                   { Icon: Linkedin, href: "https://www.linkedin.com/in/enochid200" }
                 ].map(({ Icon, href }) => (
                 <a 
